@@ -1,0 +1,1 @@
+Simple school system python app, written with the help of Django and Django Rest frameworks.
