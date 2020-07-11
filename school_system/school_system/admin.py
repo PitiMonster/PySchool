@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Teacher, Student, SchoolClass
+from .models import Teacher, Student, SchoolClass, Subject, Grade
 
 
 class TeacherAdmin(admin.ModelAdmin):
@@ -13,9 +13,15 @@ class SchoolClassAdmin(admin.ModelAdmin):
     search_fields = ['name', 'teacher']
     ordering = ['name']
 
+class GradeAdmin(admin.ModelAdmin):
+    list_display = ('grade', 'subject', 'student', 'teacher')
+    search_fields = ['student', 'subject', 'teacher']
+    ordering = ['student']
+
 admin.site.register(Teacher, TeacherAdmin)
 admin.site.register(Student)
 admin.site.register(SchoolClass, SchoolClassAdmin)
-
+admin.site.register(Subject)
+admin.site.register(Grade, GradeAdmin)
 
 # Register your models here.

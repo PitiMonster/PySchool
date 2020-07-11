@@ -11,7 +11,7 @@ class UserSchoolStatus(models.TextChoices):
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, user_status, password=None):
-        print(user_status, "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB")
+
         if not email:
             raise ValueError("Email must be provided!")
         if not username:
@@ -55,6 +55,7 @@ class User(AbstractBaseUser,  PermissionsMixin):
     is_staff            = models.BooleanField(default=False)
     is_superuser        = models.BooleanField(default=False)
     user_status         = models.CharField(verbose_name='user_status', max_length=11, choices=UserSchoolStatus.choices)
+    # test                = models.CharField(max_length=10)
 
     USERNAME_FIELD = 'email' # login field
     REQUIRED_FIELDS = ['username', 'user_status', ]

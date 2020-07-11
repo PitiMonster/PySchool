@@ -5,17 +5,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 # internal imports
-from .models import Teacher, Student, SchoolClass, User, Subject, Grade
-from .decorators import allowed_users
+from ..models import Teacher, Student, SchoolClass, User, Subject, Grade
+from ..decorators import allowed_users
 
 
 class CreateTeacherView(APIView):
 
     @allowed_users(allowed_roles=['headteacher'])
     def post(self, request):
-        new_teacher_email = request.data['new_teacher_email']
+        new_teacher_pk = request.data['new_teacher_pk']
         try:
-            new_teacher = User.objects.get(email=new_teacher_email)
+            new_teacher = User.objects.get(pk=int(new_teacher_pk))
         except User.DoesNotExist:
             return Response({'content': 'Teacher with this email does not exist!'})
 
@@ -32,12 +32,12 @@ class CreateTeacherView(APIView):
 
 class CreateStudentView(APIView):
 
-    @allowed_users(allowed_roles=['heeadteacher'])
+    @allowed_users(allowed_roles=['headteacher'])
     def post(self, request):
-        new_student_email = request.data['new_student_email']
+        new_student_pk = request.data['new_student_pk']
 
         try:
-            new_student = User.objects.get(email=new_student_email)
+            new_student = User.objects.get(email=int(new_student_pk))
         except User.DoesNotExist:
             return Response({'content': 'Student with this email does not exist!'})
 
@@ -60,15 +60,10 @@ class CreateSchoolClassView(APIView):
 
     @allowed_users(allowed_roles=['headteacher'])
     def post(self, request):
-        class_teacher_email = request.data['class_teacher_email']
+        class_teacher_pk = request.data['class_teacher_pk']
 
         try:
-            teacher = User.objects.get(email=class_teacher_email)
-        except User.DoesNotExist:
-            return Response({'content': 'Teacher with this email does not exist!'})
-
-        try:
-            class_teacher = Teacher.objects.get(user=teacher)
+            class_teacher = Teacher.objects.get(pk=int(class_teacher_pk))
         except Teacher.DoesNotExist:
             return Response({'content': 'Teacher with this email does not exist!'})
 

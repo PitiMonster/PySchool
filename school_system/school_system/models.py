@@ -65,6 +65,7 @@ class Teacher(models.Model):
 class SchoolClass(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, choices=ClassesNames.choices, unique=True, default="XXXXXX")
+    # test                = models.CharField(max_length=10)
 
     class Meta:
         verbose_name_plural = 'SchoolClasses'
@@ -91,7 +92,8 @@ class Grade(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
     
-    wage = models.IntegerField(max_length=2, validators=[MinValueValidator(1), MaxValueValidator(10)])
+    grade = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(6)])
+    wage = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)])
 
     class Meta:
         ordering = ['-subject']

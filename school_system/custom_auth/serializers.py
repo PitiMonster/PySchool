@@ -1,5 +1,8 @@
+# external imports
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
+
+# internal imports
 from user.models import UserSchoolStatus
 
 
