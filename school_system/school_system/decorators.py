@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 
-def unathenticated_user(view_func):
+def unauthenticated_user(view_func):
     ''' redirect user to home page if is authenticated '''
 
     def wrapper_func(request, *args, **kwargs):

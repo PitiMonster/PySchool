@@ -65,7 +65,6 @@ class Teacher(models.Model):
 class SchoolClass(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, choices=ClassesNames.choices, unique=True, default="XXXXXX")
-    # test                = models.CharField(max_length=10)
 
     class Meta:
         verbose_name_plural = 'SchoolClasses'
